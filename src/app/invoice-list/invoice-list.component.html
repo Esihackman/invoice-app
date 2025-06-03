@@ -1,0 +1,38 @@
+<div class="invoice-list-container">
+    <header class="invoice-list-header">
+      <div class="title-section">
+        <h1>Invoices</h1>
+        <p>No invoices</p>
+      </div>
+      <div class="controls-section">
+        <div class="filter-dropdown">
+          <span>Filter</span>
+          <img src="assets/icon-arrow-down.svg" alt="Arrow down icon">
+        </div>
+        <button class="new-invoice-button" [routerLink]="['/invoices/new']">
+          <img src="assets/icon-plus.svg" alt="Plus icon">
+          New
+        </button>
+      </div>
+    </header>
+  
+    <div *ngIf="invoices$ | async as invoices">
+      <div *ngIf="invoices.length === 0" class="empty-state">
+        <img src="assets/illustration-empty.svg" alt="Empty illustration" class="empty-state__image">
+        <h2 class="empty-state__title">There is nothing here</h2>
+        <p class="empty-state__text">Create an invoice by clicking the <span class="empty-state__new-button-text">New</span> button and get started</p>
+      </div>
+  
+      <div *ngIf="invoices.length > 0" class="invoice-cards-container">
+        <div *ngFor="let invoice of invoices" class="invoice-card" [routerLink]="['/invoices', invoice.id]">
+          <div class="invoice-card__id">#{{ invoice.id }}</div>
+          <div class="invoice-card__client-name">{{ invoice.clientName }}</div>
+          <div class="invoice-card__due-date">Due {{ invoice.paymentDue | date:'d MMM y' }}</div>
+          <div class="invoice-card__total">£ {{ invoice.total | currency:'GBP':'symbol':'1.2-2' }}</div>
+          <div class="invoice-card__status invoice-card__status--{{ invoice.status | lowercase }}">
+            <span class="invoice-card__status-dot"></span> {{ invoice.status }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
