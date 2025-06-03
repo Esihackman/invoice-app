@@ -1,1 +1,174 @@
 /* You can add global styles to this file, and also import other style files */
+
+$font-family-spartan: 'Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+
+$purple-primary:#7C5DFA;    
+$purple-light:#9277FF;     
+$navy-dark:#1E2139;         
+$navy-medium:#252945;      
+$lavender-light:#DFE3FA;    
+$gray-purple:#888EB0;       
+$blue-gray:#7E88C3;       
+$black-dark:#0C0E16;       
+$red-primary:#EC5757;      
+$red-light:#9277FF;       
+$background-light:#F8F8FB; 
+$navy-darkest:#141625;       
+
+
+$typography-scale: (
+  'heading-h1': (
+    font-family: $font-family-spartan,
+    font-size: 2rem,        
+    line-height: 2.25rem,    
+    font-weight: font-weight('bold'),
+    letter-spacing: -0.0625rem 
+  ),
+  
+  'heading-h2': (
+    font-family: $font-family-spartan,
+    font-size: 1.25rem,        
+    line-height: 1.375rem,   
+    font-weight: font-weight('bold'),
+    letter-spacing: -0.039375rem 
+  ),
+  
+ 
+  'heading-h3': (
+    font-family: $font-family-spartan,
+    font-size: 1rem,          
+    line-height: 1.5rem,     
+    font-weight: font-weight('bold'),
+    letter-spacing: -0.05rem   
+  ),
+  
+ 
+  'heading-h3-small': (
+    font-family: $font-family-spartan,
+    font-size: 0.75rem,       
+    line-height: 0.9375rem,    
+    font-weight: font-weight('bold'),
+    letter-spacing: -0.015625rem 
+  ),
+
+  'body-1': (
+    font-family: $font-family-spartan,
+    font-size: 0.75rem,        
+    line-height: 0.9375rem,   
+    font-weight: font-weight('medium'),
+    letter-spacing: -0.015625rem 
+  ),
+  
+
+  'body-2': (
+    font-family: $font-family-spartan,
+    font-size: 0.6875rem,      
+    line-height: 1.125rem,    
+    font-weight: font-weight('medium'),
+    letter-spacing: -0.014375rem 
+  )
+);
+
+
+
+body {
+  margin: 0;
+  font-family: $font-family-spartan;
+
+}
+
+.container {
+  max-width: 23.438; 
+  margin-left: auto;
+  margin-right: auto;
+  background-color: $navy-dark;
+  padding-right: 10px;
+
+
+  @media (min-width: 640px) {
+    padding-left: 1.5rem; 
+    padding-right: 1.5rem; 
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 2rem; 
+    padding-right: 2rem;
+  }
+}
+
+.app-header {
+  background-color: white;
+  border-bottom: 1px solid $gray-purple;
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.5rem; 
+  }
+
+  .header-logo-container {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .logo-icon-bg {
+    width: 4.5rem; 
+    height: 4.5rem; 
+    background-color: $purple-primary; 
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-icon {
+    width: 1.5rem; 
+    height: 1.5rem;
+    color: white; 
+  }
+
+  .header-nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; 
+  }
+
+  .dark-mode-toggle {
+    padding: 0.5rem;  
+    border: none;  
+    background-color: transparent;
+   
+
+    &:hover {
+      color: $gray-purple; 
+    }
+  }
+
+  .nav-icon {
+    width: 1.249rem; 
+    height: 1.249rem;
+    background-color: $navy-medium; 
+  }
+
+  .vertical-line {
+    width: 2px;
+    height: 4.5rem; 
+    background-color: $navy-medium;
+    margin: 0 auto; 
+  }
+  .profile-avatar {
+    width: 2rem; 
+    height: 2rem; 
+    
+    border-radius: 9999px; 
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
