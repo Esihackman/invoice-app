@@ -4,7 +4,7 @@ import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 export const routes: Routes = [
   {
     path: '',
-    title: "Home",
+    title: "invoice-app",
     component: InvoiceListComponent
   }
 ];
