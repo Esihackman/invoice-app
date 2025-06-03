@@ -1,0 +1,286 @@
+.invoice-list-container {
+    padding: 24px;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+  
+    @media (min-width: 768px) {
+      padding: 40px 48px;
+    }
+  
+    @media (min-width: 1440px) {
+      padding: 72px 0;
+      max-width: 730px;
+      margin: 0 auto;
+    }
+  }
+  
+  .invoice-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  
+    @media (min-width: 768px) {
+      margin-bottom: 56px;
+    }
+  }
+  
+  .title-section {
+    h1 {
+      font-size: 20px;
+      line-height: 22px;
+      letter-spacing: -0.625px;
+      color: var(--color-text-primary); 
+      margin-bottom: 4px;
+    }
+  
+    p {
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      color: var(--color-text-secondary); 
+    }
+  }
+  
+  .controls-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-dropdown {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 18px;
+  
+    span {
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      color: var(--color-text-primary); 
+      margin-right: 12px;
+    }
+  
+    img {
+      width: 10px;
+      height: 7px;
+      filter: var(--color-filter-icon-filter, none); /* Apply filter for dark mode arrow */
+    }
+  }
+  
+  .new-invoice-button {
+    background-color: var(--color-button-primary-bg); 
+    color: var(--color-button-primary-text);
+    border: none;
+    border-radius: 24px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.25px;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--color-button-primary-hover-bg); 
+    }
+  
+    img {
+      background-color: var(--color-button-icon-bg);
+      filter: var(--color-button-icon-filter, none); /* Apply filter for dark mode plus icon */
+      border-radius: 50%;
+      padding: 5px;
+      margin-right: 8px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+  
+  .invoice-cards-container {
+    display: grid;
+    gap: 16px;
+
+    @media (min-width: 768px) {
+      gap: 24px;
+    }
+  }
+  
+  .invoice-card {
+    background-color: var(--color-card-background);
+    padding: 24px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.10);
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: repeat(3, auto);
+    gap: 8px 0;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out;
+
+    &:hover {
+      border: 1px solid #7C5DFA; 
+    }
+
+    &__id {
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      color: var(--color-text-primary); 
+      grid-column: 1 / 2;
+      grid-row: 1;
+    }
+
+    &__client-name {
+      text-align: right;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      color: var(--color-text-secondary);
+      grid-column: 2 / 3;
+      grid-row: 1;
+    }
+
+    &__due-date {
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      color: var(--color-text-tertiary); 
+      grid-column: 1 / 2;
+      grid-row: 2;
+    }
+
+    &__total {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.8px;
+      color: var(--color-text-primary); 
+      grid-column: 1 / 2;
+      grid-row: 3;
+    }
+
+    &__status {
+      justify-self: end;
+      padding: 8px 16px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      grid-column: 2 / 3;
+      grid-row: 2 / span 2;
+      width: 104px;
+      height: 40px;
+      justify-content: center;
+
+      &-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      &--paid {
+        background-color: rgba(51, 214, 159, 0.06);
+        color: #33D69F;
+
+        .invoice-card__status-dot {
+          background-color: #33D69F;
+        }
+      }
+
+      &--pending {
+        background-color: rgba(255, 143, 0, 0.06);
+        color: #FF8F00;
+
+        .invoice-card__status-dot {
+          background-color: #FF8F00;
+        }
+      }
+
+      &--draft {
+        background-color: var(--color-button-secondary-bg);
+        color: var(--color-button-secondary-text);
+
+        .invoice-card__status-dot {
+          background-color: var(--color-text-secondary);
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr auto;
+      grid-template-rows: auto;
+      gap: 0 16px;
+      padding: 16px 24px;
+
+      &__id {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      &__due-date {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      &__client-name {
+        grid-column: 3;
+        grid-row: 1;
+        text-align: left;
+      }
+
+      &__total {
+        grid-column: 4;
+        grid-row: 1;
+        text-align: right;
+      }
+
+      &__status {
+        grid-column: 5;
+        grid-row: 1;
+        justify-self: center;
+      }
+    }
+  }
+  
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px; 
+  }
+  
+  .empty-state__image {
+    width: 200px; 
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .empty-state__title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--color-text-primary);
+  }
+  
+  .empty-state__text {
+    font-size: 1em;
+    color: var(--color-text-secondary);
+  }
+  
+  .empty-state__new-button-text {
+    font-weight: bold;
+    color: #7c5dfa;
+  } 
