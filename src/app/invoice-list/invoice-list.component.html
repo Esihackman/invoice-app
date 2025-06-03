@@ -7,10 +7,10 @@
       <div class="controls-section">
         <div class="filter-dropdown">
           <span>Filter</span>
-          <img src="assets/icon-arrow-down.svg" alt="Arrow down icon">
+          <img src="assets/images/icon-arrow-down.svg" alt="Arrow down icon">
         </div>
         <button class="new-invoice-button" [routerLink]="['/invoices/new']">
-          <img src="assets/icon-plus.svg" alt="Plus icon">
+          <img src="assets/images/icon-plus.svg" alt="Plus icon">
           New
         </button>
       </div>
@@ -18,7 +18,7 @@
   
     <div *ngIf="invoices$ | async as invoices">
       <div *ngIf="invoices.length === 0" class="empty-state">
-        <img src="assets/illustration-empty.svg" alt="Empty illustration" class="empty-state__image">
+        <img src="assets/images/illustration-empty.svg" alt="Empty illustration" class="empty-state__image">
         <h2 class="empty-state__title">There is nothing here</h2>
         <p class="empty-state__text">Create an invoice by clicking the <span class="empty-state__new-button-text">New</span> button and get started</p>
       </div>
