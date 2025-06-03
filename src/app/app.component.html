@@ -1,5 +1,42 @@
 
+<header class="app-header">
+  <div class="container header-content">
+ 
+    <div class="header-logo-container">
+      <div class="logo-icon-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="26"><path fill="#FFF" fill-rule="evenodd" d="M20.513 0C24.965 2.309 28 6.91 28 12.21 28 19.826 21.732 26 14 26S0 19.826 0 12.21C0 6.91 3.035 2.309 7.487 0L14 12.9z"/></svg>
+      </div>
+    </div>
+
+
+  <div class="header-nav-icons">
+  
+      <button class="dark-mode-toggle" (click)="toggleTheme()">
+        <svg *ngIf="!isDarkTheme()" class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+        <svg *ngIf="isDarkTheme()" class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h1M4 12H3m15.354 3.646l.707.707M4.929 4.929l.707.707M18.364 4.364l-.707.707M5.636 18.364l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+      </button>
+
+      <div class="vertical-line"></div>
+    
+      <div class="profile-avatar">
+        <img class="w-full h-full object-cover"
+             src="assets/image-avatar.jpg"
+             alt="Profile">
+      </div>
+    
+  </div>
+  </div>
+
+
 
 <router-outlet />
+
+
 
 
