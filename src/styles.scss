@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 $font-family-spartan: 'Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 
 
@@ -71,11 +70,62 @@ $typography-scale: (
 );
 
 
+:root {
+  /* Light Theme Colors */
+  --purple-primary:#7C5DFA;
+  --color-background: #F8F8FB;
+  --color-card-background: #FFFFFF;
+  --color-text-primary: #0C0E16;
+  --color-text-secondary: #888EB0;
+  --color-text-tertiary: #7E88C3;
+  --color-input-border: #DFE3FA;
+  --color-input-background: #FFFFFF;
+  --color-input-text: #0C0E16;
+  --color-button-secondary-bg: #F9FAFE;
+  --color-button-secondary-text: #7E88C3;
+  --color-button-secondary-hover-bg: #DFE3FA;
+  --color-line-separator: #DFE3FA;
+  --color-header-bg: #373B53;
+  --color-button-primary-bg: #7C5DFA;
+  --color-button-primary-text: #FFFFFF;
+  --color-button-primary-hover-bg: #9277FF;
+  --color-button-icon-bg: #FFFFFF;
+  --color-button-icon-filter: none;
+  --color-filter-icon-filter: none;
+
+  /* Dark Theme Colors (will be overridden by .dark-theme) */
+  --color-dark-mode-toggle-icon: #888EB0;
+}
+
+body.dark-theme {
+  --color-background: #141625;
+  --color-card-background: #1E2139;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #DFE3FA;
+  --color-text-tertiary: #DFE3FA;
+  --color-input-border: #252945;
+  --color-input-background: #1E2139;
+  --color-input-text: #FFFFFF;
+  --color-button-secondary-bg: #252945;
+  --color-button-secondary-text: #DFE3FA;
+  --color-button-secondary-hover-bg: #0C0E16;
+  --color-line-separator: #252945;
+  --color-header-bg: #1E2139;
+  --color-dark-mode-toggle-icon: #7C5DFA; 
+  --color-button-primary-bg: #7C5DFA;
+  --color-button-primary-text: #FFFFFF;
+  --color-button-primary-hover-bg: #9277FF;
+  --color-button-icon-bg: #0C0E16; 
+  --color-button-icon-filter: invert(100%) brightness(0) saturate(100%) hue-rotate(270deg);
+  --color-filter-icon-filter: invert(100%) brightness(0) saturate(100%) hue-rotate(270deg); 
+}
 
 body {
   margin: 0;
   font-family: $font-family-spartan;
-
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -98,8 +148,8 @@ body {
 }
 
 .app-header {
-  background-color: white;
-  border-bottom: 1px solid $gray-purple;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-line-separator);
 
   .header-content {
     display: flex;
@@ -136,32 +186,32 @@ body {
   }
 
   .dark-mode-toggle {
-    padding: 0.5rem;  
-    border: none;  
+    padding: 0.5rem;
+    border: none;
     background-color: transparent;
-   
+    color: var(--color-dark-mode-toggle-icon);
 
     &:hover {
-      color: $gray-purple; 
+      color: var(--color-text-tertiary);
     }
   }
 
   .nav-icon {
-    width: 1.249rem; 
+    width: 1.249rem;
     height: 1.249rem;
-    background-color: $navy-medium; 
+    color: currentColor; 
   }
 
   .vertical-line {
     width: 2px;
-    height: 4.5rem; 
-    background-color: $navy-medium;
+    height: 4.5rem;
+    background-color: var(--color-line-separator);
     margin: 0 auto; 
   }
   .profile-avatar {
     width: 2rem; 
     height: 2rem; 
-    
+     
     border-radius: 9999px; 
     overflow: hidden;
 
