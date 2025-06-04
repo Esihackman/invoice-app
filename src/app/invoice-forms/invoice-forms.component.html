@@ -1,0 +1,122 @@
+<div class="new-invoice-form-container">
+  <button class="back-button" (click)="router.navigate(['/invoices'])">Go back</button>
+  <h1 class="forms-title">New Invoice</h1>
+
+  <form [formGroup]="invoiceForms" (ngSubmit)="onSubmit()" class="invoice-forms">
+    <section class="bill-form">
+      <h2 class="title-section">Bill From</h2>
+      <div formGroupName="senderAddress" class="address-group">
+        <div class="form-group">
+          <label for="senderStreet">Street Address</label>
+          <input id="senderStreet" type="text" formControlName="street" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="senderCity">City</label>
+            <input id="senderCity" type="text" formControlName="city" />
+          </div>
+          <div class="form-group">
+            <label for="senderPostCode">Post Code</label>
+            <input id="senderPostCode" type="text" formControlName="postCode" />
+          </div>
+          <div class="form-group">
+            <label for="senderCountry">Country</label>
+            <input id="senderCountry" type="text" formControlName="country" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bill-to-container">
+      <h2 class="section-title">Bill To</h2>
+      <div class="form-group">
+        <label for="clientName">Client's Name</label>
+        <input id="clientName" type="text" formControlName="clientName" />
+      </div>
+      <div class="form-group">
+        <label for="clientEmail">Client's Email</label>
+        <input id="clientEmail" type="email" formControlName="clientEmail" />
+      </div>
+      <div formGroupName="clientAddress" class="address-group">
+        <div class="form-group">
+          <label for="clientStreet">Street Address</label>
+          <input id="clientStreet" type="text" formControlName="street" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="clientCity">City</label>
+            <input id="clientCity" type="text" formControlName="city" />
+          </div>
+          <div class="form-group">
+            <label for="clientPostCode">Post Code</label>
+            <input id="clientPostCode" type="text" formControlName="postCode" />
+          </div>
+          <div class="form-group">
+            <label for="clientCountry">Country</label>
+            <input id="clientCountry" type="text" formControlName="country" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="invoice-details-container">
+      <h2 class="section-title">Invoice Details</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="createdAt">Invoice Date</label>
+          <input id="createdAt" type="date" formControlName="createdAt" (change)="onDateOrTermsChange()" />
+        </div>
+        <div class="form-group">
+          <label for="paymentTerms">Payment Terms</label>
+          <select id="paymentTerms" formControlName="paymentTerms" (change)="onDateOrTermsChange()">
+            <option [value]="1">Net 1 Day</option>
+            <option [value]="7">Net 7 Days</option>
+            <option [value]="14">Net 14 Days</option>
+            <option [value]="30">Net 30 Days</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="projectDescription">Project Description</label>
+        <input id="projectDescription" type="text" formControlName="description" />
+      </div>
+    </section>
+
+    <section class="item-list-wrapper">
+      <h2 class="wrapper-title">Item List</h2>
+      <div formArrayName="items" class="items-list">
+        <div class="items-header form-row">
+          <label>Item Name</label>
+          <label>Qty.</label>
+          <label>Price</label>
+          <label>Total</label>
+          <div></div>
+        </div>
+        <div *ngFor="let item of itemFormGroups; let i = index" [formGroupName]="i" class="item-row form-row">
+          <div class="form-group">
+            <input type="text" formControlName="name" />
+          </div>
+          <div class="form-group">
+            <input type="number" formControlName="quantity" (input)="onQuantityChange(item)" />
+          </div>
+          <div class="form-group">
+            <input type="number" formControlName="price" (input)="onPriceChange(item)" />
+          </div>
+          <div class="form-group total-display">
+            <span>{{ item.get('total')?.value | currency:'GBP':'symbol':'1.2-2' }}</span>
+          </div>
+          <button type="button" class="delete-items-button" (click)="removeItem(i)">
+            <img src="assets/images/icon-delete.svg" alt="Delete icon" />
+          </button>
+        </div>
+        <button type="button" class="add-new-items-button" (click)="addItem()">+ Add New Item</button>
+      </div>
+    </section>
+
+    <div class="form-actions">
+      <button type="button" class="button button--discard">Discard</button>
+      <button type="button" class="button button--draft">Save as Draft</button>
+      <button type="submit" class="button button--save">Save & Send</button>
+    </div>
+  </form>
+</div>
