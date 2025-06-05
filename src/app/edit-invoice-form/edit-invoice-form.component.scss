@@ -1,0 +1,353 @@
+.edit-invoice-form-container {
+  padding: 32px 24px 100px;
+  background-color: var(--color-background); 
+
+  @media (min-width: 768px) {
+    padding: 56px 48px 120px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 48px 0 0;
+    max-width: 730px;
+    margin: 0 auto;
+  }
+
+  .back-button {
+    background-color: transparent;
+    border: none;
+    color: var(--color-text-tertiary); 
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.25px;
+    transition: color 0.2s ease-in-out;
+    margin-bottom: 24px;
+
+    &:hover {
+      color: var(--color-text-primary); 
+    }
+
+    &::before {
+      content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="7" height="10"><path d="M6.342.886L2.114 5.114l4.228 4.228z" fill="%237C5DFA" fill-rule="evenodd"/></svg>');
+      margin-right: 23px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .form-title {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.5px;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+
+    .invoice-id-display {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .invoice-form {
+    background-color: var(--color-card-background);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.10);
+
+    @media (min-width: 768px) {
+      padding: 48px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: -0.25px;
+      color: #7C5DFA;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+
+      label {
+        display: block;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: -0.25px;
+        color: var(--color-text-tertiary);
+        margin-bottom: 8px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 16px 20px;
+        border: 1px solid var(--color-input-border);
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: -0.25px;
+        color: var(--color-input-text);
+        background-color: var(--color-input-background);
+
+        &:focus {
+          outline: none;
+          border-color: #7C5DFA;
+        }
+      }
+
+      input[type="date"] {
+        padding-right: 40px; 
+        background: url('../../assets/images/icon-calendar.svg') no-repeat right 15px center;
+        background-size: 16px;
+        filter: var(--color-dark-mode-toggle-icon-filter, none); 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: url('../../assets/images/icon-arrow-down.svg') no-repeat right 15px center;
+        background-size: 10px;
+        filter: var(--color-dark-mode-toggle-icon-filter, none);
+        cursor: pointer; 
+      }
+    }
+
+    .form-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+
+      .form-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+    }
+
+    .bill-to-section,
+    .invoice-details-section {
+      margin-top: 48px;
+    }
+
+    .item-list-section {
+      margin-top: 48px;
+
+      .section-title {
+        color: #7E88C3; 
+        font-size: 18px;
+        line-height: 32px;
+        letter-spacing: -0.375px;
+      }
+
+      .item-list {
+        margin-bottom: 24px;
+
+        .item-header {
+          display: none;
+
+          @media (min-width: 768px) {
+            display: flex;
+            margin-bottom: 16px;
+
+            label {
+              font-size: 12px;
+              line-height: 15px;
+              letter-spacing: -0.25px;
+              color: var(--color-text-tertiary);
+              flex: 1;
+            }
+
+            label:nth-child(2) {
+              flex: 0.5;
+            }
+
+            label:nth-child(3) {
+              flex: 0.7;
+            }
+
+            label:nth-child(4) {
+              flex: 0.7;
+              text-align: right;
+            }
+
+            div {
+              width: 16px; 
+            }
+          }
+        }
+
+        .item-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+          margin-bottom: 16px;
+          align-items: center;
+
+          .form-group {
+            margin-bottom: 0;
+
+            input {
+              margin-bottom: 0;
+            }
+          }
+
+          .form-group:nth-child(1) {
+            flex: 1;
+          }
+
+          .form-group:nth-child(2) {
+            width: calc(33% - 8px);
+            flex: none;
+          }
+
+          .form-group:nth-child(3) {
+            width: calc(33% - 8px);
+            flex: none;
+          }
+
+          .total-display {
+            width: calc(33% - 8px);
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; 
+
+            span {
+              font-weight: bold;
+              font-size: 12px;
+              line-height: 15px;
+              letter-spacing: -0.25px;
+              color: var(--color-text-primary);
+            }
+          }
+
+          .delete-item-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+              filter: var(--color-dark-mode-toggle-icon-filter, none); 
+            }
+          }
+
+          @media (min-width: 768px) {
+            gap: 24px;
+
+            .form-group:nth-child(1) {
+              flex: 1;
+            }
+
+            .form-group:nth-child(2) {
+              flex: 0.5;
+            }
+
+            .form-group:nth-child(3) {
+              flex: 0.7;
+            }
+
+            .total-display {
+              flex: 0.7;
+              text-align: right;
+              justify-content: flex-end;
+            }
+
+            .delete-item-button {
+              width: auto;
+              height: auto;
+            }
+          }
+        }
+
+        .add-new-item-button {
+          width: 100%;
+          background-color: var(--color-button-secondary-bg);
+          color: var(--color-button-secondary-text);
+          border: none;
+          border-radius: 24px;
+          padding: 16px;
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 15px;
+          letter-spacing: -0.25px;
+          cursor: pointer;
+          transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+          &:hover {
+            background-color: var(--color-button-secondary-hover-bg);
+          }
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 40px;
+      padding: 24px;
+      background-color: var(--color-card-background);
+      box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.10);
+
+      @media (min-width: 768px) {
+        justify-content: flex-end;
+        padding-top: 0;
+        box-shadow: none;
+        background-color: transparent;
+      }
+
+      .button {
+        border: none;
+        border-radius: 24px;
+        padding: 16px 24px;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: -0.25px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+        &--discard {
+          background-color: var(--color-button-secondary-bg);
+          color: var(--color-button-secondary-text);
+
+          &:hover {
+            background-color: var(--color-button-secondary-hover-bg);
+          }
+        }
+
+        &--draft {
+          background-color: #373B53;
+          color: white;
+
+          &:hover {
+            background-color: #0C0E16;
+          }
+        }
+
+        &--save {
+          background-color: #7C5DFA;
+          color: white;
+
+          &:hover {
+            background-color: #9277FF;
+          }
+        }
+      }
+    }
+  }
+}
