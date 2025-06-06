@@ -1,0 +1,81 @@
+<div *ngIf="invoice$ | async as invoice" class="invoice-detail-container">
+  <div class="invoice-detail-header">
+    <button class="back-button">Go back</button>
+    <div class="status-bar">
+      <span>Status</span>
+      <span class="status-badge status-badge--{{ invoice.status | lowercase }}">{{ invoice.status }}</span>
+    </div>
+  </div>
+
+  <div class="invoice-details-card">
+    <div class="invoice-id-and-description">
+      <p class="invoice-id">#{{ invoice.id }}</p>
+      <p class="invoice-description">{{ invoice.description }}</p>
+    </div>
+
+    <div class="sender-address">
+      <p>{{ invoice.senderAddress.street }}</p>
+      <p>{{ invoice.senderAddress.city }}</p>
+      <p>{{ invoice.senderAddress.postCode }}</p>
+      <p>{{ invoice.senderAddress.country }}</p>
+    </div>
+
+    <div class="invoice-dates-and-client-address">
+      <div>
+        <p class="label">Invoice Date</p>
+        <p class="value">{{ invoice.createdAt | date:'d MMM y' }}</p>
+      </div>
+      <div>
+        <p class="label">Payment Due</p>
+        <p class="value">{{ invoice.paymentDue | date:'d MMM y' }}</p>
+      </div>
+      <div>
+        <p class="label">Bill To</p>
+        <p class="value">{{ invoice.clientName }}</p>
+        <p>{{ invoice.clientAddress.street }}</p>
+        <p>{{ invoice.clientAddress.city }}</p>
+        <p>{{ invoice.clientAddress.postCode }}</p>
+        <p>{{ invoice.clientAddress.country }}</p>
+      </div>
+    </div>
+
+    <div class="client-email">
+      <p class="label">Sent to</p>
+      <p class="value">{{ invoice.clientEmail }}</p>
+    </div>
+
+    <div class="item-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>QTY.</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoice.items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | currency:'GBP':'symbol':'1.2-2' }}</td>
+            <td>{{ item.total | currency:'GBP':'symbol':'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grand-total">
+      <p>Grand Total</p>
+      <p>£ {{ invoice.total | currency:'GBP':'symbol':'1.2-2' }}</p>
+    </div>
+  </div>
+
+  <div class="invoice-detail-actions">
+    <button class="edit-button" [routerLink]="['/invoices', invoice.id, 'edit']">Edit</button>
+    <button class="delete-button" (click)="openDeleteModal()">Delete</button>
+    <button class="mark-as-paid-button">Mark as Paid</button>
+  </div>
+</div>
+
+
