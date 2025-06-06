@@ -1,0 +1,10 @@
+<div class="modal-container">
+  <div class="modal-section">
+    <h2 class="modal-title">Confirm Deletion</h2>
+    <p class="modal-content">Are you sure you want to delete invoice #<span class="invoice-display-id">{{ invoiceId }}</span>? This action cannot be undone.</p>
+    <div class="modal-action">
+      <button class="button button--cancel" (click)="cancel()">Cancel</button>
+      <button class="button button--delete" (click)="confirm()">Delete</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-section {
+  background-color: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.10);
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    padding: 48px;
+  }
+}
+
+.modal-title {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+  color: #0C0E16;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+}
+
+.modal-content {
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: -0.25px;
+  color: #888EB0;
+  margin-bottom: 24px;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+
+  .invoice-display-id {
+    font-weight: bold;
+  }
+}
+
+.modal-action {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
+
+  .button {
+    border: none;
+    border-radius: 24px;
+    padding: 16px 24px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.25px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    &--cancel {
+      background-color: #F9FAFE;
+      color: #7E88C3;
+
+      &:hover {
+        background-color: #DFE3FA;
+      }
+    }
+
+    &--delete {
+      background-color: #EC5757;
+      color: white;
+
+      &:hover {
+        background-color: #FF9797;
+      }
+    }
+  }
+}
