@@ -7,12 +7,21 @@
       <div class="controls-section">
         <div class="filter-dropdown">
           <span>Filter</span>
+          <!-- <select (change) ="Onchange()">
+            <option value="draft">Draft</option>
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+          </select> -->
           <img src="assets/images/icon-arrow-down.svg" alt="Arrow down icon">
+          
+            <!-- <option value="all">All</option> -->
+            
         </div>
         <button class="new-invoice-button" [routerLink]="['/invoices/new']">
           <img src="assets/images/icon-plus.svg" alt="Plus icon">
           New
         </button>
+        
       </div>
     </header>
   

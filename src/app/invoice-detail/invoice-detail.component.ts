@@ -4,11 +4,11 @@ import { Observable, switchMap } from 'rxjs';
 import { InvoiceService } from '../services/invoice.service';
 import { Invoice } from '../models/invoice.model';
 import { CommonModule } from '@angular/common';
-
+import { DeleteInvoiceModalComponent } from '../delete-invoice-modal/delete-invoice-modal.component';
 @Component({
   selector: 'app-invoice-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,DeleteInvoiceModalComponent],
   templateUrl: './invoice-detail.component.html',
   styleUrl: './invoice-detail.component.scss'
 })
@@ -34,6 +34,23 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   
+  openDeleteModal(): void {
+    this.isDeleteModalOpen = true;
+  }
+
+  closeDeleteModal(): void {
+    this.isDeleteModalOpen = false;
+  }
+
+  confirmDelete(): void {
+    if (this.currentInvoiceId) {
+      this.invoiceService.deleteInvoice(this.currentInvoiceId).subscribe(() => {
+        this.router.navigate(['/']); 
+        this.closeDeleteModal();
+      });
     }
+  }
+
+}
   
 

@@ -78,4 +78,11 @@
   </div>
 </div>
 
+<app-delete-invoice-modal
+  *ngIf="isDeleteModalOpen"
+  [invoiceId]="currentInvoiceId"
+  (onCancel)="closeDeleteModal()"
+  (onConfirm)="confirmDelete()"
+></app-delete-invoice-modal>
+
 

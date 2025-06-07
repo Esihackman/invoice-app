@@ -22,5 +22,9 @@ export class InvoiceListComponent implements OnInit {
     this.invoiceService.loadInvoices().subscribe();
   }
 
+  // Onchange() {
+  //   alert('changes updated')
+  // }
+
   // TODO: Implement filtering and delete functionality
 } 
