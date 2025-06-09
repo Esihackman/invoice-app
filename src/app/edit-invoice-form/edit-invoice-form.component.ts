@@ -105,7 +105,7 @@ export class EditInvoiceFormComponent implements OnInit {
       const updatedInvoice: Invoice = {
         ...this.invoiceForm.getRawValue(),
         id: this.invoiceId,
-        status: 'pending', // Assuming status remains 'pending' on edit for now
+        status: 'pending', 
         createdAt: new Date().toISOString().slice(0, 10),
         paymentDue: new Date(Date.now() + this.invoiceForm.value.paymentTerms * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
       };

@@ -22,18 +22,23 @@ export class InvoiceListComponent implements OnInit {
   constructor(private invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
-    this.invoices$ = combineLatest([
-      this.invoiceService.getInvoices(),
-      this.selectedStatuses$
-    ]).pipe(
-      map(([invoices, selectedStatuses]) => {
-        if (selectedStatuses.length === 0) {
-          return invoices; 
-        }
-        return invoices.filter(invoice => selectedStatuses.includes(invoice.status.toLowerCase()));
-      })
-    );
-  }
+  this.invoiceService.loadInvoices().subscribe(); // 🚨 This triggers data loading from data.json
+
+  this.invoices$ = combineLatest([
+    this.invoiceService.getInvoices(),
+    this.selectedStatuses$
+  ]).pipe(
+    map(([invoices, selectedStatuses]) => {
+      if (selectedStatuses.length === 0) {
+        return invoices;
+      }
+      return invoices.filter(invoice =>
+        selectedStatuses.includes(invoice.status.toLowerCase())
+      );
+    })
+  );
+}
+
 
   onFilterChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;

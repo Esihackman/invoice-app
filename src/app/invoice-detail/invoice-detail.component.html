@@ -1,6 +1,7 @@
 <div *ngIf="invoice$ | async as invoice" class="invoice-detail-container">
   <div class="invoice-detail-header">
-    <button class="back-button">Go back</button>
+   <button class="back-button" (click)="goBack()">Go back</button>
+
     <div class="status-bar">
       <span>Status</span>
       <span class="status-badge status-badge--{{ invoice.status | lowercase }}">{{ invoice.status }}</span>
@@ -74,7 +75,8 @@
   <div class="invoice-detail-actions">
     <button class="edit-button" [routerLink]="['/invoices', invoice.id, 'edit']">Edit</button>
     <button class="delete-button" (click)="openDeleteModal()">Delete</button>
-    <button class="mark-as-paid-button">Mark as Paid</button>
+   <button class="mark-as-paid-button" (click)="markAsPaid()">Mark as Paid</button>
+
   </div>
 </div>
 

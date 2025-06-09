@@ -48,7 +48,21 @@ export class InvoiceService {
     const currentInvoices = this._invoices.getValue();
     const filteredInvoices = currentInvoices.filter(invoice => invoice.id !== id);
     this._invoices.next(filteredInvoices);
-    console.log(`Invoice with id ${id} deleted.`);
+   console.log(`Invoice with id ${id} deleted.`);
+
     return of(true);
   }
+
+  markInvoiceAsPaid(id: string): Observable<Invoice | undefined> {
+  const currentInvoices = this._invoices.getValue();
+  const updatedInvoices = currentInvoices.map(invoice =>
+    invoice.id === id ? { ...invoice, status: 'paid' } as Invoice : invoice
+  );
+  const updatedInvoice = updatedInvoices.find(invoice => invoice.id === id);
+  this._invoices.next(updatedInvoices);
+  console.log(`Invoice ${id} marked as paid.`);
+  return of(updatedInvoice);
+}
+
+
 }
