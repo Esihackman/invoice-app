@@ -14,7 +14,7 @@ export class InvoiceService {
   constructor(private http: HttpClient) { }
 
   loadInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>('assets/data.json').pipe(
+    return this.http.get<Invoice[]>('/assets/data/data.json').pipe(
       tap(invoices => this._invoices.next(invoices))
     );
   }

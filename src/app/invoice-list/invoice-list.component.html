@@ -2,44 +2,79 @@
     <header class="invoice-list-header">
       <div class="title-section">
         <h1>Invoices</h1>
-        <p>No invoices</p>
+        <p class="invoice-count-mobile" *ngIf="invoices$ | async as invoices; else noInvoicesMobile">
+          <span *ngIf="invoices.length > 0">{{ invoices.length }} invoices</span>
+        </p>
+        <ng-template #noInvoicesMobile><p class="invoice-count-mobile">No invoices</p></ng-template>
+        <p class="invoice-count-desktop" *ngIf="invoices$ | async as invoices">
+          <span *ngIf="invoices.length > 0">There are {{ invoices.length }} total invoices</span>
+          <span *ngIf="invoices.length === 0">No invoices</span>
+        </p>
       </div>
       <div class="controls-section">
-        <div class="filter-dropdown">
-          <span>Filter</span>
-          <!-- <select (change) ="Onchange()">
-            <option value="draft">Draft</option>
-            <option value="pending">Pending</option>
-            <option value="paid">Paid</option>
-          </select> -->
-          <img src="assets/images/icon-arrow-down.svg" alt="Arrow down icon">
-          
-            <!-- <option value="all">All</option> -->
-            
+        <div class="filter-dropdown" (click)="toggleDropdown()">
+          <span>Filter <span class="hidden-on-mobile">by status</span></span>
+          <img src="../../assets/images/icon-arrow-down.svg" alt="Arrow down icon">
+          <div class="filter-options-dropdown" [class.active]="isDropdownOpen">
+            <label class="checkbox-item">
+              <input type="checkbox" value="draft" (change)="onFilterChange($event)" [checked]="(selectedStatuses$ | async)?.includes('draft')" />
+              <span>Draft</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" value="pending" (change)="onFilterChange($event)" [checked]="(selectedStatuses$ | async)?.includes('pending')" />
+              <span>Pending</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" value="paid" (change)="onFilterChange($event)" [checked]="(selectedStatuses$ | async)?.includes('paid')" />
+              <span>Paid</span>
+            </label>
+          </div>
         </div>
         <button class="new-invoice-button" [routerLink]="['/invoices/new']">
-          <img src="assets/images/icon-plus.svg" alt="Plus icon">
-          New
+          <div class="button-icon-circle">
+            <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.313 10.023v-3.71h3.71v-2.58h-3.71V.023h-2.58v3.71H.023v2.58h3.71v3.71z" fill="#000000" fill-rule="nonzero"/></svg>
+          </div>
+          <span class="button-text">New <span class="hidden-on-mobile">Invoice</span></span>
         </button>
-        
       </div>
     </header>
   
     <div *ngIf="invoices$ | async as invoices">
       <div *ngIf="invoices.length === 0" class="empty-state">
-        <img src="assets/images/illustration-empty.svg" alt="Empty illustration" class="empty-state__image">
+        <img src="../../assets/images/illustration-empty.svg" alt="Empty illustration" class="empty-state__image">
         <h2 class="empty-state__title">There is nothing here</h2>
         <p class="empty-state__text">Create an invoice by clicking the <span class="empty-state__new-button-text">New</span> button and get started</p>
       </div>
   
       <div *ngIf="invoices.length > 0" class="invoice-cards-container">
         <div *ngFor="let invoice of invoices" class="invoice-card" [routerLink]="['/invoices', invoice.id]">
-          <div class="invoice-card__id">#{{ invoice.id }}</div>
-          <div class="invoice-card__client-name">{{ invoice.clientName }}</div>
-          <div class="invoice-card__due-date">Due {{ invoice.paymentDue | date:'d MMM y' }}</div>
-          <div class="invoice-card__total">£ {{ invoice.total | currency:'GBP':'symbol':'1.2-2' }}</div>
-          <div class="invoice-card__status invoice-card__status--{{ invoice.status | lowercase }}">
-            <span class="invoice-card__status-dot"></span> {{ invoice.status }}
+          <div class="card-content">
+            <div class="header">
+              <div class="invoice-id">
+                <span class="hash">#</span>
+                <span class="id">{{ invoice.id }}</span>
+              </div>
+              <div class="client">
+                {{ invoice.clientName }}
+              </div>
+            </div>
+
+            <div class="footer">
+              <div class="invoice-details">
+                <div class="due-date">
+                  <span class="due-label">Due&nbsp;&nbsp;</span>
+                  <span class="date">{{ invoice.paymentDue | date:'d MMM y' }}</span>
+                </div>
+                <div class="amount">
+                  {{ invoice.total | currency:'GBP':'symbol':'1.2-2' }}
+                </div>
+              </div>
+
+              <div class="status-badge status-badge--{{ invoice.status | lowercase }}">
+                <div class="status-dot"></div>
+                <span class="status-text">{{ invoice.status }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

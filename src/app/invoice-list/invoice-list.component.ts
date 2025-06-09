@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from '../services/invoice.service';
 import { Invoice } from '../models/invoice.model';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -14,17 +15,39 @@ import { RouterLink } from '@angular/router';
 })
 export class InvoiceListComponent implements OnInit {
   invoices$!: Observable<Invoice[]>;
+  private _selectedStatuses = new BehaviorSubject<string[]>([]);
+  selectedStatuses$ = this._selectedStatuses.asObservable();
+  isDropdownOpen: boolean = false;
 
   constructor(private invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
-    this.invoices$ = this.invoiceService.getInvoices();
-    this.invoiceService.loadInvoices().subscribe();
+    this.invoices$ = combineLatest([
+      this.invoiceService.getInvoices(),
+      this.selectedStatuses$
+    ]).pipe(
+      map(([invoices, selectedStatuses]) => {
+        if (selectedStatuses.length === 0) {
+          return invoices; 
+        }
+        return invoices.filter(invoice => selectedStatuses.includes(invoice.status.toLowerCase()));
+      })
+    );
   }
 
-  // Onchange() {
-  //   alert('changes updated')
-  // }
+  onFilterChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    const status = checkbox.value;
+    const currentStatuses = this._selectedStatuses.getValue();
 
-  // TODO: Implement filtering and delete functionality
+    if (checkbox.checked) {
+      this._selectedStatuses.next([...currentStatuses, status]);
+    } else {
+      this._selectedStatuses.next(currentStatuses.filter(s => s !== status));
+    }
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 } 

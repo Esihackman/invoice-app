@@ -2,138 +2,322 @@
 $font-family-spartan: 'Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 
 
-$purple-primary:#7C5DFA;    
-$purple-light:#9277FF;     
-$navy-dark:#1E2139;         
-$navy-medium:#252945;      
-$lavender-light:#DFE3FA;    
-$gray-purple:#888EB0;       
-$blue-gray:#7E88C3;       
-$black-dark:#0C0E16;       
-$red-primary:#EC5757;      
-$red-light:#9277FF;       
-$background-light:#F8F8FB; 
-$navy-darkest:#141625;       
+$purple-primary: #7C5DFA;
+$purple-light: #9277FF;
+$navy-dark: #1E2139;
+$navy-medium: #252945;
+$lavender-light: #DFE3FA; 
+$gray-purple: #888EB0; 
+$blue-gray: #7E88C3; 
+$black-dark: #0C0E16; 
+$red-primary: #EC5757;
+$red-light-button-hover: #FF9797; 
+$background-light: #F8F8FB;
+$navy-darkest: #141625;
+$white: #FFFFFF;
+$light-button-bg: #F9FAFE; 
+$draft-button-light-bg: #373B53;
+$draft-button-light-hover-bg: #0C0E16; 
+$paid-status-bg: rgba(51, 214, 159, 0.06);
+$paid-status-text: #33D69F;
+$pending-status-bg: rgba(255, 143, 0, 0.06);
+$pending-status-text: #FF8F00;
+
 
 
 $typography-scale: (
   'heading-h1': (
     font-family: $font-family-spartan,
-    font-size: 2rem,        
-    line-height: 2.25rem,    
-    font-weight: font-weight('bold'),
-    letter-spacing: -0.0625rem 
+    font-size: 32px,        
+    line-height: 36px,    
+    font-weight: bold,
+    letter-spacing: -1px 
   ),
   
   'heading-h2': (
     font-family: $font-family-spartan,
-    font-size: 1.25rem,        
-    line-height: 1.375rem,   
-    font-weight: font-weight('bold'),
-    letter-spacing: -0.039375rem 
+    font-size: 20px,        
+    line-height: 22px,   
+    font-weight: bold,
+    letter-spacing: -0.625px 
   ),
   
  
   'heading-h3': (
     font-family: $font-family-spartan,
-    font-size: 1rem,          
-    line-height: 1.5rem,     
-    font-weight: font-weight('bold'),
-    letter-spacing: -0.05rem   
+    font-size: 16px,          
+    line-height: 24px,     
+    font-weight: bold,
+    letter-spacing: -0.8px   
   ),
   
  
   'heading-h3-small': (
     font-family: $font-family-spartan,
-    font-size: 0.75rem,       
-    line-height: 0.9375rem,    
-    font-weight: font-weight('bold'),
-    letter-spacing: -0.015625rem 
+    font-size: 12px,
+    line-height: 15px,    
+    font-weight: bold,
+    letter-spacing: -0.25px 
   ),
 
   'body-1': (
     font-family: $font-family-spartan,
-    font-size: 0.75rem,        
-    line-height: 0.9375rem,   
-    font-weight: font-weight('medium'),
-    letter-spacing: -0.015625rem 
+    font-size: 12px,
+    line-height: 15px,   
+    font-weight: 500,
+    letter-spacing: -0.25px 
   ),
   
 
   'body-2': (
     font-family: $font-family-spartan,
-    font-size: 0.6875rem,      
-    line-height: 1.125rem,    
-    font-weight: font-weight('medium'),
-    letter-spacing: -0.014375rem 
+    font-size: 11px,
+    line-height: 18px,    
+    font-weight: 500,
+    letter-spacing: -0.229px 
   )
 );
 
+@mixin font-style($key) {
+  font-family: map-get(map-get($typography-scale, $key), font-family);
+  font-size: map-get(map-get($typography-scale, $key), font-size);
+  line-height: map-get(map-get($typography-scale, $key), line-height);
+  font-weight: map-get(map-get($typography-scale, $key), font-weight);
+  letter-spacing: map-get(map-get($typography-scale, $key), letter-spacing);
+}
+
+
+
+@mixin button-base {
+  border: none;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  height: 48px; 
+}
+
+@mixin button-primary { 
+  @include button-base;
+  background-color: var(--color-button-primary-bg);
+  color: var(--color-button-primary-text);
+  padding: 8px 15px; 
+  
+  &:hover {
+    background-color: var(--color-button-primary-hover-bg);
+  }
+
+  .button-icon-circle {
+    background-color: #FFFFFF;
+    filter: none;
+    border-radius: 50%;
+    padding: 10.5px;
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@mixin button-secondary { 
+  @include button-base;
+  background-color: var(--color-button-secondary-bg);
+  color: var(--color-button-secondary-text);
+  padding: 16px 24px; 
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--color-button-secondary-hover-bg);
+  }
+}
+
+@mixin button-draft { 
+  @include button-base;
+  background-color: var(--color-button-draft-bg);
+  color: var(--color-button-draft-text);
+  padding: 16px 24px; 
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--color-button-draft-hover-bg);
+  }
+}
+
+@mixin button-delete { 
+  @include button-base;
+  background-color: var(--color-button-delete-bg);
+  color: var(--color-button-primary-text); 
+  padding: 16px 24px; 
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--color-button-delete-hover-bg);
+  }
+}
+
+
+@mixin form-field-base {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  background-color: var(--color-input-background);
+  color: var(--color-input-text);
+  font-family: $font-family-spartan;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: bold;
+  transition: border-color 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-input-active-border);
+  }
+}
+
+@mixin text-field {
+  @include form-field-base;
+}
+
+@mixin dropdown {
+  @include form-field-base;
+  appearance: none; 
+  background-image: url('./assets/images/icon-arrow-down.svg'); 
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px; 
+
+  &:hover {
+    border-color: var(--color-dropdown-hover-bg);
+  }
+
+  &:active {
+    border-color: var(--color-dropdown-active-border);
+  }
+}
+
+@mixin date-picker {
+  @include form-field-base;
+  background-image: url('./assets/images/icon-calendar.svg'); 
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px; 
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
 
 :root {
-  /* Light Theme Colors */
-  --purple-primary:#7C5DFA;
-  --color-background: #F8F8FB;
-  --color-card-background: #FFFFFF;
-  --color-text-primary: #0C0E16;
-  --color-text-secondary: #888EB0;
-  --color-text-tertiary: #7E88C3;
-  --color-input-border: #DFE3FA;
-  --color-input-background: #FFFFFF;
-  --color-input-text: #0C0E16;
-  --color-button-secondary-bg: #F9FAFE;
-  --color-button-secondary-text: #7E88C3;
-  --color-button-secondary-hover-bg: #DFE3FA;
-  --color-line-separator: #DFE3FA;
-  --color-header-bg: #373B53;
-  --color-button-primary-bg: #7C5DFA;
-  --color-button-primary-text: #FFFFFF;
-  --color-button-primary-hover-bg: #9277FF;
-  --color-button-icon-bg: #FFFFFF;
+
+  --purple-primary: #{$purple-primary};
+  --color-background: #{$background-light};
+  --color-card-background: #{$white};
+  --color-text-primary: #{$black-dark};
+  --color-text-secondary: #{$gray-purple};
+  --color-text-tertiary: #{$blue-gray};
+  --color-input-border: #{$lavender-light};
+  --color-input-background: #{$white};
+  --color-input-text: #{$black-dark};
+  --color-input-active-border: #{$purple-primary}; 
+  --color-button-primary-bg: #{$purple-primary};
+  --color-button-primary-text: #{$white};
+  --color-button-primary-hover-bg: #{$purple-light};
+  --color-button-secondary-bg: #{$light-button-bg}; 
+  --color-button-secondary-text: #{$blue-gray};
+  --color-button-secondary-hover-bg: #{$lavender-light};
+  --color-button-delete-bg: #{$red-primary}; 
+  --color-button-delete-hover-bg: #{$red-light-button-hover}; 
+  --color-button-draft-bg: #{$draft-button-light-bg}; 
+  --color-button-draft-text: #{$lavender-light}; 
+  --color-button-draft-hover-bg: #{$draft-button-light-hover-bg}; 
+  --color-button-icon-bg: #{$white};
   --color-button-icon-filter: none;
   --color-filter-icon-filter: none;
-
-  /* Dark Theme Colors (will be overridden by .dark-theme) */
-  --color-dark-mode-toggle-icon: #888EB0;
+  --color-line-separator: #{$lavender-light};
+  --color-header-bg: #{$navy-dark};
+  --color-dark-mode-toggle-icon: #{$gray-purple};
+  --color-status-paid-bg: #{$paid-status-bg}; 
+  --color-status-paid-text: #{$paid-status-text}; 
+  --color-status-pending-bg: #{$pending-status-bg}; 
+  --color-status-pending-text: #{$pending-status-text}; 
+  --color-status-draft-bg: var(--color-button-secondary-bg); 
+  --color-status-draft-text: var(--color-button-secondary-text); 
+  --color-dropdown-hover-bg: #{$lavender-light}; 
+  --color-dropdown-active-border: #{$purple-primary}; 
 }
 
 body.dark-theme {
-  --color-background: #141625;
-  --color-card-background: #1E2139;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #DFE3FA;
-  --color-text-tertiary: #DFE3FA;
-  --color-input-border: #252945;
-  --color-input-background: #1E2139;
-  --color-input-text: #FFFFFF;
-  --color-button-secondary-bg: #252945;
-  --color-button-secondary-text: #DFE3FA;
-  --color-button-secondary-hover-bg: #0C0E16;
-  --color-line-separator: #252945;
-  --color-header-bg: #1E2139;
-  --color-dark-mode-toggle-icon: #7C5DFA; 
-  --color-button-primary-bg: #7C5DFA;
-  --color-button-primary-text: #FFFFFF;
-  --color-button-primary-hover-bg: #9277FF;
-  --color-button-icon-bg: #0C0E16; 
+  --color-background: #{$navy-darkest};
+  --color-card-background: #{$navy-dark};
+  --color-text-primary: #{$white};
+  --color-text-secondary: #{$lavender-light};
+  --color-text-tertiary: #{$lavender-light};
+  --color-input-border: #{$navy-medium};
+  --color-input-background: #{$navy-dark};
+  --color-input-text: #{$white};
+  --color-input-active-border: #{$purple-primary}; 
+  --color-button-primary-bg: #{$purple-primary};
+  --color-button-primary-text: #{$white};
+  --color-button-primary-hover-bg: #{$purple-light};
+  --color-button-secondary-bg: #{$navy-medium}; 
+  --color-button-secondary-text: #{$lavender-light};
+  --color-button-secondary-hover-bg: #{$black-dark};
+  --color-button-delete-bg: #{$red-primary}; 
+  --color-button-delete-hover-bg: #{$red-light-button-hover}; 
+  --color-button-draft-bg: #{$navy-dark}; 
+  --color-button-draft-text: #{$lavender-light}; 
+  --color-button-draft-hover-bg: #{$black-dark}; 
+  --color-button-icon-bg: #{$black-dark};
   --color-button-icon-filter: invert(100%) brightness(0) saturate(100%) hue-rotate(270deg);
-  --color-filter-icon-filter: invert(100%) brightness(0) saturate(100%) hue-rotate(270deg); 
+  --color-filter-icon-filter: invert(100%) brightness(0) saturate(100%) hue-rotate(270deg);
+  --color-line-separator: #{$navy-medium};
+  --color-header-bg: #{$navy-dark};
+  --color-dark-mode-toggle-icon: #{$purple-primary};
+  --color-status-paid-bg: rgba(51, 214, 159, 0.06); 
+  --color-status-paid-text: #33D69F; 
+  --color-status-pending-bg: rgba(255, 143, 0, 0.06); 
+  --color-status-pending-text: #FF8F00; 
+  --color-status-draft-bg: var(--color-button-secondary-bg); 
+  --color-status-draft-text: var(--color-button-secondary-text); 
+  --color-dropdown-hover-bg: #{$black-dark};
+  --color-dropdown-active-border: #{$purple-primary}; 
 }
 
+html,
 body {
+  height: 100%; 
+  box-sizing: border-box; 
   margin: 0;
-  font-family: $font-family-spartan;
+  @include font-style('body-1');
   background-color: var(--color-background);
   color: var(--color-text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+@media (min-width: 768px) {
+  app-root {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+    height: 100%;
+    align-items: stretch;
+  }
+}
+
 .container {
-  max-width: 23.438; 
+  max-width: 23.438rem;
   margin-left: auto;
   margin-right: auto;
-  background-color: $navy-dark;
-  padding-right: 10px;
+  background-color: transparent;
+  padding-right: 1.5rem;
 
 
   @media (min-width: 640px) {
@@ -151,11 +335,34 @@ body {
   background-color: var(--color-header-bg);
   border-bottom: 1px solid var(--color-line-separator);
 
+  @media (min-width: 768px) {
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 103px;
+    height: 100%; 
+    border-radius: 0 20px 20px 0;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: none;
+    border-right: 1px solid var(--color-line-separator);
+    flex-shrink: 0;
+    flex-basis: 103px;
+  }
+
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 4.5rem; 
+
+    @media (min-width: 768px) {
+      flex-direction: column;
+      height: 100%; 
+      justify-content: space-between;
+      padding: 0;
+      flex-grow: 1; 
+    }
   }
 
   .header-logo-container {
@@ -171,11 +378,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (min-width: 768px) {
+      width: 103px;
+      height: 103px;
+      border-radius: 0 20px 20px 0;
+    }
   }
 
   .logo-icon {
-    width: 1.5rem; 
-    height: 1.5rem;
+    width: 40px;
+    height: 38px;
     color: white; 
   }
 
@@ -183,6 +396,11 @@ body {
     display: flex;
     align-items: center;
     gap: 1.5rem; 
+
+    @media (min-width: 768px) {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
   }
 
   .dark-mode-toggle {
@@ -199,7 +417,8 @@ body {
   .nav-icon {
     width: 1.249rem;
     height: 1.249rem;
-    color: currentColor; 
+    color: currentColor;
+    
   }
 
   .vertical-line {
@@ -207,11 +426,16 @@ body {
     height: 4.5rem;
     background-color: var(--color-line-separator);
     margin: 0 auto; 
+
+    @media (min-width: 768px) {
+      width: 100%;
+      height: 1px;
+      margin: 0;
+    }
   }
   .profile-avatar {
     width: 2rem; 
     height: 2rem; 
-     
     border-radius: 9999px; 
     overflow: hidden;
 
@@ -220,5 +444,24 @@ body {
       height: 100%;
       object-fit: cover;
     }
+
+    @media (min-width: 768px) {
+      margin-top: auto; 
+    }
+  }
+}
+
+.main-content {
+  @media (min-width: 768px) {
+    flex-grow: 1; 
+    flex-basis: 0; 
+    min-width: 0; 
+    padding: 0 48px;
+    overflow: auto; 
+    background-color: transparent; 
+  }
+
+  @media (min-width: 1440px) {
+    padding: 0 165px 50px 250px;
   }
 }

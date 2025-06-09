@@ -26,10 +26,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
+                "glob": "favicon.ico",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
@@ -86,10 +87,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"
@@ -99,5 +97,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "invoice-app"
 }

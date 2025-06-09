@@ -5,7 +5,7 @@ import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 })
 export class ThemeService {
   private renderer: Renderer2;
-  private currentTheme: string = 'light'; // Default theme
+  private currentTheme: string = 'light'; 
 
   constructor(rendererFactory: RendererFactory2) {
     this.renderer = rendererFactory.createRenderer(null, null);
@@ -17,7 +17,7 @@ export class ThemeService {
     if (savedTheme) {
       this.setTheme(savedTheme);
     } else {
-      // Check for user's system preference
+      
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       this.setTheme(prefersDark ? 'dark' : 'light');
     }
